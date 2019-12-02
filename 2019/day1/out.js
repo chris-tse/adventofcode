@@ -10,7 +10,7 @@ var line = liner.next();
 
 while (line) {
   var input = parseInt(line.toString());
-  var currFuel = getFuelByMass(input);
+  var currFuel = recursiveGetFuelByMass(0, input);
   fuelSum += currFuel;
   line = liner.next();
 }
@@ -23,5 +23,20 @@ console.log('Total fuel required:', fuelSum);
 
 function getFuelByMass(mass) {
   return Math.floor(mass / 3) - 2;
+}
+/**
+ * Returns the amount of fuel needed for any given mass taking into account fuel required for the fuel
+ * @param {number} mass
+ */
+
+
+function recursiveGetFuelByMass(sum, nextMass) {
+  var fuel = getFuelByMass(nextMass);
+
+  if (fuel > 0) {
+    return recursiveGetFuelByMass(sum + fuel, fuel);
+  } else {
+    return sum;
+  }
 }
 
