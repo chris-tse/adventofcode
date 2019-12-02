@@ -1,14 +1,11 @@
 import LineByLine from 'n-readlines';
 
 const liner = new LineByLine('./input');
-
-let fuelSum = 0;
-
 let line = liner.next();
+let fuelSum = 0;
 
 while (line) {
 	let input = parseInt(line.toString());
-
 	let currFuel = getFuelByMass(input);
 
 	fuelSum += currFuel;
