@@ -10,9 +10,9 @@ rules:
     no-extra-bind: 2
     babel/no-invalid-this: 2
     no-iterator: 2
-    no-magic-numbers:
-        - 2
-        - ignore: [-1, 0, 1, 2]
+    # no-magic-numbers:
+    #     - 2
+    #     - ignore: [-1, 0, 1, 2]
     no-multi-spaces: 2
     no-native-reassign: 2
     no-new: 2
