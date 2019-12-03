@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-let input = fs.readFileSync('input');
+let input = fs.readFileSync('input2');
 
 const instructions = {
 	1: (arg1Pos, arg2Pos, destPos, memory) => {
