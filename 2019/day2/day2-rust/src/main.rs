@@ -36,6 +36,7 @@ fn main() -> io::Result<()> {
 				println!("Part 2");
 				println!("Noun: {}, Verb: {}", noun, verb);
 				println!("100 * {} + {} = {}", noun, verb, 100 * noun + verb);
+				::std::process::exit(0);
 			}
 		}
 	}
@@ -62,7 +63,7 @@ pub fn exec_program(
 
 		match instructions.get(&opcode) {
 			Some(function) => function(arg1_pos, arg2_pos, dest_pos, memory),
-			None => (),
+			None => println!("Invalid opcode"),
 		}
 
 		curr_pos += 4;
