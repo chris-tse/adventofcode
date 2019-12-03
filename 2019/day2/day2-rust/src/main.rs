@@ -73,16 +73,19 @@ pub fn exec_program(
 	let mut curr_pos = 0;
 
 	while memory[curr_pos] != 99 {
+		// Extract values to use for this operation
 		let opcode = memory[curr_pos];
 		let arg1_pos = memory[curr_pos + 1];
 		let arg2_pos = memory[curr_pos + 2];
 		let dest_pos = memory[curr_pos + 3];
 
+		// Hashmap get returns an Option to check if result exists
 		match instructions.get(&opcode) {
 			Some(function) => function(arg1_pos, arg2_pos, dest_pos, memory),
 			None => println!("Invalid opcode"),
 		}
 
+		// Opcode chunks are 4 items long
 		curr_pos += 4;
 	}
 }
