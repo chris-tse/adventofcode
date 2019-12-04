@@ -20,52 +20,28 @@ function getCoordsOfWirePaths(paths) {
 	//	  x: Set(y)
 	// }
 	let coordMap = {};
-
 	let currPoint = [0, 0];
+	let length = 0;
 
-	function addCoord(coord) {
-		let [x, y] = coord;
-
-		if (!coordMap[x]) {
-			coordMap[x] = new Set();
+	function addCoord(coord, length) {
+		if (!coordMap[coord]) {
+			coordMap[coord] = length;
 		}
-
-		coordMap[x].add(y);
 	}
 
 	paths.forEach(path => {
 		let direction = path[0];
 		let amount = parseInt(path.substr(1));
 
-		// For each direction, increment or decrement the appropriate coord
-		// Add intermediate coords to the coordMap
-		switch (direction) {
-			case 'R':
-				for (let i = 0; i < amount; i++) {
-					currPoint[0]++;
-					addCoord(currPoint);
-				}
-				break;
-			case 'L':
-				for (let i = 0; i < amount; i++) {
-					currPoint[0]--;
-					addCoord(currPoint);
-				}
-				break;
-			case 'U':
-				for (let i = 0; i < amount; i++) {
-					currPoint[1]++;
-					addCoord(currPoint);
-				}
-				break;
-			case 'D':
-				for (let i = 0; i < amount; i++) {
-					currPoint[1]--;
-					addCoord(currPoint);
-				}
-				break;
-			default:
-				break;
+		const dX = { R: 1, L: -1, U: 0, D: 0 };
+		const dY = { R: 0, L: 0, U: 1, D: -1 };
+
+		for (let i = 0; i < amount; i++) {
+			currPoint[0] += dX[direction];
+			currPoint[1] += dY[direction];
+			length++;
+
+			addCoord(currPoint, length);
 		}
 	});
 
@@ -80,27 +56,24 @@ function getCoordsOfWirePaths(paths) {
 function getIntersections(wire1Map, wire2Map) {
 	let intersections = [];
 
-	for (let w1x in wire1Map) {
+	for (let w1coord in wire1Map) {
 		// Check if x coord in one set is in another, skip if not
-		if (w1x in wire2Map) {
-			let w1ySet = wire1Map[w1x];
-			let w2ySet = wire2Map[w1x];
-
-			// Check if any y-coord in first set appear in second set
-			// Mark intersection if found
-			w1ySet.forEach(i => {
-				if (w2ySet.has(i)) {
-					intersections.push([parseInt(w1x), i]);
-				}
-			});
+		if (w1coord in wire2Map) {
+			intersections.push({ coord: w1coord, length: wire1Map[w1coord] + wire2Map[w1coord] });
 		}
 	}
 
 	return intersections;
 }
 
-let distances = getIntersections(wire1Map, wire2Map)
-	.map(coord => coord.map(Math.abs))
-	.map(pair => pair[0] + pair[1]);
+let intersections = getIntersections(wire1Map, wire2Map);
 
-console.log(`Part 1: ${Math.min(...distances)}`);
+let part1 = intersections
+	.map(i => i.coord)
+	.map(i => i.split(','))
+	.map(coord => Math.abs(coord[0]) + Math.abs(coord[1]));
+
+let part2 = intersections.map(i => i.length);
+
+console.log(`Part 1: ${Math.min(...part1)}`);
+console.log(`Part 2: ${Math.min(...part2)}`);
