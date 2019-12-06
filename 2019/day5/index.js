@@ -121,11 +121,7 @@ function executeProgram(memory, instructions) {
 	let pointer = 0;
 
 	while (memory[pointer] !== 99) {
-		// console.log('parsing ', memory[pointer]);
-
 		let [instruction, _, arg1Mode, arg2Mode, arg3Mode] = parseOpCode(memory[pointer]);
-
-		// console.log('Instruction code:', instruction);
 
 		let arg1 = memory[pointer + 1];
 		let arg2 = memory[pointer + 2];
@@ -148,11 +144,9 @@ function executeProgram(memory, instructions) {
 	}
 }
 
-function parseOpCode(opcode) {
-	// console.log(opcode);
-	return opcode
+const parseOpCode = opcode =>
+	opcode
 		.toString()
 		.padStart(5, 0)
 		.split('')
 		.reverse();
-}
