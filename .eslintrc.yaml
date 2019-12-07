@@ -28,7 +28,6 @@ rules:
           args: after-used
     no-new-require: 2
     no-path-concat: 2
-    no-sync: 2
     array-bracket-spacing: [2, never]
     block-spacing: [2, always]
     brace-style:
@@ -52,19 +51,12 @@ rules:
         - 2
         - capIsNewExceptions: ['$.Deferred']
     new-parens: 2
-    padding-line-between-statements: [
-        "error",
-        {
-            blankLine: "always",
-            prev: ["const", "let", "var"],
-            next: "*"
-        },
-        {
-            blankLine: "any",
-            prev: ["const", "let", "var"],
-            next: ["const", "let", "var"]
-        }
-    ]
+    padding-line-between-statements:
+        [
+            'error',
+            { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+            { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
+        ]
     no-array-constructor: 2
     no-bitwise: 2
     no-continue: 2
