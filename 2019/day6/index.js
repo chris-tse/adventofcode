@@ -42,10 +42,6 @@ function getOrbitCount(input) {
  * @param {string} dest Destination object to reach orbit with
  */
 function getConnectingOrbitCount(input, src, dest) {
-	/**
-	 * A map of orbitters to their parent
-	 * @typedef OrbitterMap
-	 */
 	let orbits = input.reduce((acc, next) => {
 		let [parent, child] = next.split(')');
 
@@ -72,8 +68,7 @@ function getConnectingOrbitCount(input, src, dest) {
 		return resPath;
 	}
 
-	const srcPath = getPathToCOM('YOU', orbits);
-	const destPath = getPathToCOM('SAN', orbits);
+	const [srcPath, destPath] = [getPathToCOM(src, orbits), getPathToCOM(dest, orbits)];
 
 	let connectingObj = '';
 
