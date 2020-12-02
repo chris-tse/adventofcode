@@ -16,7 +16,7 @@ impl Entry {
 		};
 	}
 
-	pub fn fromString(entry: &str) -> Entry {
+	pub fn from(entry: &str) -> Entry {
 		let split_res: Vec<&str> = entry.split(": ").collect();
 		let (policy, password) = (split_res[0], String::from(split_res[1]));
 		let split_policy: Vec<&str> = policy.split(" ").collect();
