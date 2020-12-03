@@ -1,3 +1,6 @@
+extern crate regex;
+use regex::Regex;
+
 #[derive(Debug)]
 pub struct Entry {
 	password: String,
@@ -17,22 +20,32 @@ impl Entry {
 	}
 
 	pub fn from(entry: &str) -> Entry {
-		let split_res: Vec<&str> = entry.split(": ").collect();
-		let (policy, password) = (split_res[0], String::from(split_res[1]));
-		let split_policy: Vec<&str> = policy.split(" ").collect();
-		let (range, target_letter) = (split_policy[0], split_policy[1].chars().nth(0).unwrap());
-		let range_split: Vec<usize> = range
-			.split("-")
-			.map(|s| s.parse::<usize>().unwrap())
-			.collect();
-		let (min, max) = (range_split[0], range_split[1]);
+		let rg = Regex::new(r"(?P<min>\d)-(?P<max>\d)\s(?P<target_letter>\w):\s(?P<password>\w+)")
+			.unwrap();
 
-		return Entry {
-			password,
-			target_letter,
-			min,
-			max,
-		};
+		match rg.captures(entry) {
+			Some(captures) => {
+				return Entry {
+					password: captures
+						.name("password")
+						.map(|m| String::from(m.as_str()))
+						.unwrap(),
+					target_letter: captures
+						.name("target_letter")
+						.map(|m| String::from(m.as_str()).chars().nth(0).unwrap())
+						.unwrap(),
+					min: captures
+						.name("min")
+						.map(|m| m.as_str().parse::<usize>().unwrap())
+						.unwrap(),
+					max: captures
+						.name("max")
+						.map(|m| m.as_str().parse::<usize>().unwrap())
+						.unwrap(),
+				};
+			}
+			None => unreachable!(),
+		}
 	}
 
 	pub fn is_valid(&self) -> bool {
