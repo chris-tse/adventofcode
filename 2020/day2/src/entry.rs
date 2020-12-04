@@ -19,10 +19,7 @@ impl Entry {
 		};
 	}
 
-	pub fn from(entry: &str) -> Entry {
-		let rg = Regex::new(r"(?P<min>\d)-(?P<max>\d)\s(?P<target_letter>\w):\s(?P<password>\w+)")
-			.unwrap();
-
+	pub fn from(entry: &str, rg: &Regex) -> Entry {
 		match rg.captures(entry) {
 			Some(captures) => {
 				return Entry {
