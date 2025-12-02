@@ -2,8 +2,13 @@
   "name": "adventofcode",
   "version": "1.0.0",
   "description": "A collection of solutions of attempted Advent of Code challenges.",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "biome check",
+    "prepare": "effect-language-service patch",
+    "typecheck": "tsc --noEmit",
+    "2025": "bun run 2025/index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,15 +22,12 @@
   },
   "homepage": "https://github.com/chris-tse/adventofcode#readme",
   "devDependencies": {
-    "@babel/cli": "^7.12.8",
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-babel": "^5.3.0",
-    "prettier": "^1.19.1"
+    "@biomejs/biome": "2.3.8",
+    "@effect/language-service": "^0.58.0",
+    "typescript": "^5.9.3",
+    "ultracite": "6.3.8"
   },
   "dependencies": {
-    "n-readlines": "^1.0.0"
+    "effect": "^3.19.8"
   }
 }
