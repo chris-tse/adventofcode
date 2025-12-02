@@ -1,15 +1,11 @@
+import { BunRuntime } from "@effect/platform-bun";
 import { Effect } from "effect";
-
-import { day1 } from "./solutions/day1";
+import { day1 } from "./solutions/day1.ts";
 
 const main = Effect.gen(function* () {
   yield* Effect.log("Advent of Code 2025");
 
-  yield* Effect.log("Day 1");
-
-  yield* day1();
-
-  return "Success!";
+  yield* day1;
 });
 
-Effect.runPromise(main).then(console.log);
+BunRuntime.runMain(main);

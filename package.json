@@ -8,7 +8,7 @@
     "lint": "biome check",
     "prepare": "effect-language-service patch",
     "typecheck": "tsc --noEmit",
-    "2025": "bun run 2025/index.ts"
+    "2025": "bun run src/2025/index.ts"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
     "ultracite": "6.3.8"
   },
   "dependencies": {
+    "@effect/platform": "^0.93.6",
+    "@effect/platform-bun": "^0.86.0",
     "effect": "^3.19.8"
   }
 }

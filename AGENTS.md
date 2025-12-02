@@ -1,6 +1,7 @@
 # AI Agent Instructions
 
 <!-- effect-solutions:start -->
+
 ## Effect Solutions Usage
 
 The Effect Solutions CLI provides curated best practices and patterns for Effect TypeScript. Before working on Effect code, check if there's a relevant topic that covers your use case.
@@ -10,18 +11,18 @@ The Effect Solutions CLI provides curated best practices and patterns for Effect
 - `effect-solutions search <term>` - Search topics by keyword
 
 **Local Effect Source:** The Effect repository is cloned to `~/code/opensource/effect` for reference. Use this to explore APIs, find usage examples, and understand implementation details when the documentation isn't enough.
+
 <!-- effect-solutions:end -->
 
-
-# Ultracite Code Standards
+## Ultracite Code Standards
 
 This project uses **Ultracite**, a zero-config Biome preset that enforces strict code quality standards through automated formatting and linting.
 
-## Quick Reference
+### Quick Reference
 
-- **Format code**: `npx ultracite fix`
-- **Check for issues**: `npx ultracite check`
-- **Diagnose setup**: `npx ultracite doctor`
+- **Format code**: `bunx ultracite fix`
+- **Check for issues**: `bunx ultracite check`
+- **Diagnose setup**: `bunx ultracite doctor`
 
 Biome (the underlying engine) provides extremely fast Rust-based linting and formatting. Most issues are automatically fixable.
 
@@ -64,11 +65,11 @@ Write code that is **accessible, performant, type-safe, and maintainable**. Focu
 - Nest children between opening and closing tags instead of passing as props
 - Don't define components inside other components
 - Use semantic HTML and ARIA attributes for accessibility:
-  - Provide meaningful alt text for images
-  - Use proper heading hierarchy
-  - Add labels for form inputs
-  - Include keyboard event handlers alongside mouse events
-  - Use semantic elements (`<button>`, `<nav>`, etc.) instead of divs with roles
+    - Provide meaningful alt text for images
+    - Use proper heading hierarchy
+    - Add labels for form inputs
+    - Include keyboard event handlers alongside mouse events
+    - Use semantic elements (`<button>`, `<nav>`, etc.) instead of divs with roles
 
 ### Error Handling & Debugging
 
@@ -103,14 +104,17 @@ Write code that is **accessible, performant, type-safe, and maintainable**. Focu
 ### Framework-Specific Guidance
 
 **Next.js:**
+
 - Use Next.js `<Image>` component for images
 - Use `next/head` or App Router metadata API for head elements
 - Use Server Components for async data fetching instead of async Client Components
 
 **React 19+:**
+
 - Use ref as a prop instead of `React.forwardRef`
 
 **Solid/Svelte/Vue/Qwik:**
+
 - Use `class` and `for` attributes (not `className` or `htmlFor`)
 
 ---
