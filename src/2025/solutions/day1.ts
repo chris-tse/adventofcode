@@ -14,19 +14,23 @@ export const day1 = Effect.gen(function* () {
     const password = inputSequence.reduce((prev, curr) => {
         const parsed = parseRotation(curr);
 
-        if (parsed.op === 'add') {
-            dial = wrapNumber(dial + parsed.value);
-        } else {
-            dial = wrapNumber(dial - parsed.value);
+        switch (parsed.op) {
+            case 'add': {
+                const newDial = dial + parsed.value;
+                dial = newDial % 100;
+                return Math.floor(newDial / 100) + prev;
+            }
+            case 'subtract': {
+                const reverseDial = (100 - dial) % 100;
+                const newDial = reverseDial + parsed.value;
+                const zeroPasses = Math.floor(newDial / 100);
+                dial = (100 - (newDial % 100)) % 100;
+                return zeroPasses + prev;
+            }
+            default:
+                console.log('impossible no op');
+                return prev;
         }
-
-        // console.log('Rotation', curr, ' point at', dial === 0 ? '**0**' : dial);
-
-        if (dial === 0) {
-            return prev + 1;
-        }
-
-        return prev;
     }, 0);
 
     yield* Effect.log({ password });
@@ -39,8 +43,4 @@ function parseRotation(rotation: string): {
     const op = rotation.startsWith('R') ? 'add' : 'subtract';
     const value = Number.parseInt(rotation.slice(1), 10);
     return { op, value };
-}
-
-function wrapNumber(newNumber: number) {
-    return ((newNumber % 100) + 100) % 100;
 }
